@@ -7,12 +7,22 @@ def reset():
     seconds.set("00")
     
     minutes_entry.delete(0,END)
+    seconds_entry.delete(0,END)
+
     minutes_entry.insert(0,"00")
+    seconds_entry.insert(0,"00")
+
+
 
 #start function
 def start():
+    
     minutes = minutes_entry.get()
-    print(minutes)
+    print('Minutes:'+ minutes)
+
+    seconds = seconds_entry.get()
+    print("Seconds:"+seconds)
+    
 
 #Pause function
 def pause():
@@ -24,6 +34,8 @@ pomodoro_window.title("Pomodoro Timer")
 
 pomodoro_window.geometry('600x400')
 
+
+
 minutes = StringVar()
 seconds = StringVar()
 
@@ -31,6 +43,29 @@ minutes.set("00")
 seconds.set("00")
 
 minutes_entry = Entry(pomodoro_window,width = 2,text = minutes)
+seconds_entry = Entry(pomodoro_window,width = 2,text = seconds)
+
+start_button = Button(master = pomodoro_window,command = start,font = ("Times New Roman",20), bg = "green",text = "Start")
+pause_button = Button(master = pomodoro_window,command = pause,font = ("Times New Roman",20), bg = "red",text="Stop")
+reset_button = Button(master = pomodoro_window,command = reset,font = ("Times New Roman",20), bg = "blue",text = "Reset")
+
+
+#Grid System
+pomodoro_window.columnconfigure((0,1,2),weight = 1)
+pomodoro_window.rowconfigure(0,weight = 1)
+pomodoro_window.rowconfigure(1,weight = 1)
+
+
+#***FIX ME (Notes in Git)***
+#Entries
+minutes_entry.grid(row = 0,column = 0,sticky = "w")
+seconds_entry.grid(row = 0,column = 1,sticky = "e")
+
+#Buttons
+start_button.grid(row = 1, column = 0,sticky = "nesw")
+pause_button.grid(row = 1, column = 1,sticky = "nesw")
+reset_button.grid(row = 1, column = 2,sticky = "nesw")
+
 
 #This segment will be used if I decide to put in images
 
@@ -39,15 +74,8 @@ minutes_entry = Entry(pomodoro_window,width = 2,text = minutes)
 #reset_image = PhotoImage(file = "C:/Users/Gr880/Desktop/Coding/Pomodoro_Timer/Main/reset.png")
 
 
-start_button = Button(master = pomodoro_window,command = start,font = ("Times New Roman",20), bg = "green")
-pause_button = Button(master = pomodoro_window,command = pause,font = ("Times New Roman",20), bg = "red")
-reset_button = Button(master = pomodoro_window,command = reset,font = ("Times New Roman",20), bg = "blue")
-minutes_entry.pack()
-start_button.pack(padx = 50,pady =20)
-pause_button.pack(padx = 50)
-reset_button.pack(padx = 100)
 
 
-pomodoro_window.mainloop() 
 
-#git test
+pomodoro_window.mainloop()
+
